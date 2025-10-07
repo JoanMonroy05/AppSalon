@@ -7,26 +7,17 @@ use Illuminate\Http\Request;
 
 class LoginController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index():View
+    public function showLoginForm():View
     {
         return view('auth.login');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function login(Request $request)
     {
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function logout()
     {
         //
     }

@@ -1,9 +1,11 @@
 @extends('layout')
 
+@section('title', 'Iniciar Sesión')
+
 @section('content')
 <h1 class="nombre-pagina">Iniciar Sesión</h1>
 <p class="descripcion-pagina">Inicia sesión con tus datos</p>
-<form action="{{ route('login.store') }}" class="formulario" method="POST">
+<form action="{{ route('login.submit') }}" class="formulario" method="POST">
     @csrf
     <div class="campo">
         <label for="email">Email</label>

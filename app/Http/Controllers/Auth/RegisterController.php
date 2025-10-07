@@ -16,7 +16,7 @@ class RegisterController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function showRegistrationForm()
     {
         return view('auth.crear-cuenta');
     }
@@ -24,7 +24,7 @@ class RegisterController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $validate = $request->validate([
             'nombre'   => 'required|string|max:60',
@@ -50,18 +50,18 @@ class RegisterController
             //Enviar el email
             Mail::to($usuario->email)->send(new ConfirmarMailable($usuario));
             //Redireccionar al usuario
-            return redirect()->route('mensaje.usuario');
+            return redirect()->route('register.message');
         }else{
             return back()->with('error', 'Error al crear la cuenta, por favor intenta de nuevo.');
         }
     }
 
-    public function confirmar($token)
+    public function confirm($token)
     {
         return view('auth.confirmar-cuenta');
     }
 
-    public function mensaje()
+    public function message()
     {
         return view('auth.mensaje');
     }

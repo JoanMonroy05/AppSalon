@@ -6,34 +6,22 @@ use Illuminate\Http\Request;
 
 class ForgotPasswordController
 {
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function showForgotForm()
     {
         return view('auth.olvide-password');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function sendResetLink(Request $request)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function showResetForm(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function resetPassword(Request $request, string $id)
     {
         //
     }

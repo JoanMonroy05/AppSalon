@@ -1,9 +1,11 @@
 @extends('layout')
 
+@section('title', 'Crear Cuenta')
+
 @section('content')
 <h1 class="nombre-pagina">Crear Cuenta</h1>
 <p class="descripcion-pagina">Llena el siguiente formulario para crear una cuenta</p>
-<form action="{{ route('crear.store') }}" class="formulario" method="POST" novalidate>
+<form action="{{ route('register.submit') }}" class="formulario" method="POST" novalidate>
     {{-- Mostrar mensajes de error --}}
     @include('partials.alertas')
     {{-- Proteccion contra CSRF --}}

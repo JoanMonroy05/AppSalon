@@ -1,9 +1,11 @@
 @extends('layout')
 
+@section('title', 'Olvide Contraseña')
+
 @section('content')
 <h1 class="nombre-pagina">Olvide Contraseña</h1>
 <p class="descripcion-pagina">Restablece tu contraseña escribiendo tu email</p>
-<form action="{{ route('olvide.store') }}" class="formulario" method="POST">
+<form action="{{ route('password.reset.submit') }}" class="formulario" method="POST">
     @csrf
     <div class="campo">
         <label for="email">Email</label>
