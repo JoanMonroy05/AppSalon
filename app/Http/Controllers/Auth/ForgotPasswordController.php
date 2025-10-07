@@ -38,13 +38,32 @@ class ForgotPasswordController
         return back()->with('info', 'Hemos enviado un enlace de restablecimiento de contraseña a tu correo electrónico.');
     }
 
-    public function showResetForm(string $id)
+    public function showResetForm(string $token)
     {
-        //
+        $usuario = Usuario::where('token', $token)->first();
+        if (!$usuario) {
+            session()->flash('error', 'Token no válido o cuenta ya confirmada.');
+            return view('auth.recuperar-password');
+        }
+        return view('auth.recuperar-password')->with('token', $token);
     }
 
-    public function resetPassword(Request $request, string $id)
+    public function resetPassword(Request $request, string $token)
     {
-        //
+        $validate = $request->validate([
+            'password' => 'required|string|min:6',
+        ]);
+
+        $usuario = Usuario::where('token', $token)->first();
+        if (!$usuario) {
+            return back()->withErrors(['token' => 'Token no válido o cuenta ya confirmada.']);
+        }
+
+        $usuario->password = bcrypt($validate['password']);
+        $usuario->token = null;
+        $usuario->confirmado = 1;
+        $usuario->save();
+
+        return redirect()->route('login.form')->with('success', 'Contraseña restablecida correctamente. Ahora puedes iniciar sesión.');
     }
 }

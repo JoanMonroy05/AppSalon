@@ -29,7 +29,7 @@ class RegisterController
             'nombre'   => 'required|string|max:60',
             'apellido' => 'required|string|max:60',
             'email'    => 'required|email|max:30|unique:usuarios,email',
-            'password' => 'required|string|min:6|',
+            'password' => 'required|string|min:6',
             'telefono' => 'required|string|size:10|regex:/^3\d{9}$/',
         ]);
         
@@ -65,8 +65,7 @@ class RegisterController
         $usuario->confirmado = 1;
         $usuario->token = null;
         $usuario->save();
-        session()->flash('success', 'Cuenta confirmada correctamente. Ya puedes iniciar sesión.');
-        return view('auth.confirmar-cuenta');
+        return redirect()->route('login.form')->with('success', 'Cuenta confirmada correctamente. Ya puedes iniciar sesión.');
     }
 
     public function message()
