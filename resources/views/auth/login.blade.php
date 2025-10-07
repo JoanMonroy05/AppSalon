@@ -6,6 +6,7 @@
 <h1 class="nombre-pagina">Iniciar Sesión</h1>
 <p class="descripcion-pagina">Inicia sesión con tus datos</p>
 <form action="{{ route('login.submit') }}" class="formulario" method="POST">
+    @include('partials.alertas')
     @csrf
     <div class="campo">
         <label for="email">Email</label>

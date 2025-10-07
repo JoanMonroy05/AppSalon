@@ -1,10 +1,17 @@
 {{-- Errores --}}
-@if ($errors->any() || session('error'))
+@if ($errors->any())
     @foreach ($errors->all() as $error)
         <div class="alert alert-danger">
             {{ $error }}
         </div>
     @endforeach
+@endif
+
+{{-- Error personalizado --}}
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
 @endif
 
 {{-- Éxito --}}

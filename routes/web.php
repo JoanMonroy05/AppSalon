@@ -13,7 +13,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Reestablecer contraseña
 Route::get('/olvide', [ForgotPasswordController::class, 'showForgotForm'])->name('password.forgot.form');
 Route::post('/olvide', [ForgotPasswordController::class, 'sendResetLink'])->name('password.forgot.submit');
-Route::get('/recuperar', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset.form');
+Route::get('/recuperar/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset.form');
 Route::post('/recuperar', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset.submit');
 
 // Crear cuenta de usuario

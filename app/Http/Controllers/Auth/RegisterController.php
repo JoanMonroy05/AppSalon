@@ -6,7 +6,6 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use App\Mail\BienvenidaMailable;
 use App\Mail\ConfirmarMailable;
 
 use function Ramsey\Uuid\v1;
@@ -58,6 +57,15 @@ class RegisterController
 
     public function confirm($token)
     {
+        $usuario = Usuario::where('token', $token)->first();
+        if (!$usuario) {
+            session()->flash('error', 'Token no válido o cuenta ya confirmada.');
+            return view('auth.confirmar-cuenta');
+        }
+        $usuario->confirmado = 1;
+        $usuario->token = null;
+        $usuario->save();
+        session()->flash('success', 'Cuenta confirmada correctamente. Ya puedes iniciar sesión.');
         return view('auth.confirmar-cuenta');
     }
 
